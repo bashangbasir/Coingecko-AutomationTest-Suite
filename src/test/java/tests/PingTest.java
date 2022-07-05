@@ -21,7 +21,7 @@ public class PingTest extends BaseTest {
     }
 
     @Test
-    public void PING_expect_body_contains_gecko_says(){
+    public void PING_checkGeckoSaysInResponse(){
         given()
                 .when()
                     .get(PING_URI)
