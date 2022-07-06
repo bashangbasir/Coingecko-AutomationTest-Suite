@@ -21,20 +21,20 @@ public class PingTest extends BaseTest {
     }
 
     @Test
-    public void PING_checkGeckoSaysInResponse(){
-        given()
-                .when()
-                    .get(PING_URI)
-                .then()
-                    .assertThat().body("'gecko_says'",equalTo("(V3) To the Moon!"));
-    }
-
-    @Test
     public void PING_checkContentType_expectApplicationJson(){
         given()
                 .when()
                     .get(PING_URI)
                 .then()
                     .assertThat().contentType(ContentType.JSON);
+    }
+
+    @Test
+    public void PING_checkGeckoSaysInResponse(){
+        given()
+                .when()
+                    .get(PING_URI)
+                .then()
+                    .assertThat().body("'gecko_says'",equalTo("(V3) To the Moon!"));
     }
 }

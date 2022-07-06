@@ -34,7 +34,8 @@ public class TrendingTests extends BaseTest {
                 .when()
                     .get(TRENDING_URI)
                 .then()
-                .assertThat().body("coins",hasSize(7));
+                //Check there are 7 top coin in the response
+                    .assertThat().body("coins",hasSize(7));
     }
 
 
