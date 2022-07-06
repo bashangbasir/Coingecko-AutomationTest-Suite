@@ -29,7 +29,7 @@ public class TrendingTests extends BaseTest {
     }
 
     @Test
-    public void TRENDING_checkTopCoins_expectSevenCoins(){
+    public void TRENDING_checkCoinsInResponse_expectSevenCoins(){
         given()
                 .when()
                     .get(TRENDING_URI)
