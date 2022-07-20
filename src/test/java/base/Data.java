@@ -2,7 +2,6 @@ package base;
 
 import org.testng.annotations.DataProvider;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Data {
@@ -20,6 +19,14 @@ public class Data {
         return new Object[][]{
                 {"bitcoin",Arrays.asList("myr", "btc", "usd")},
                 {"ripple",Arrays.asList("myr", "btc", "usd")}
+        };
+    }
+
+    @DataProvider(name = "dataMultipleCoinVsSingleCurrencies")
+    public Object[][] dataMultipleCoinVsSingleCurrencies(){
+        return new Object[][]{
+                {Arrays.asList("bitcoin", "ripple", "tether"),"usd"},
+                {Arrays.asList("solana", "polkadot", "dogecoin"),"myr"}
         };
     }
 
