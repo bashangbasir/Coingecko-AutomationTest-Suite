@@ -29,7 +29,7 @@ public class TrendingTests extends BaseTest {
     }
 
     @Test
-    public void TRENDING_checkCoinsInResponse_expectSevenCoins(){
+    public void TRENDING_checkCoinsInResponse_expectTopSevenCoins(){
         given()
                 .when()
                     .get(TRENDING_URI)
@@ -37,6 +37,5 @@ public class TrendingTests extends BaseTest {
                 //Check there are 7 top coin in the response
                     .assertThat().body("coins",hasSize(7));
     }
-
 
 }
