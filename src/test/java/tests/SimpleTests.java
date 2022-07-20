@@ -12,23 +12,23 @@ import static org.hamcrest.Matchers.hasKey;
 public class SimpleTests extends BaseTest {
 
 
-    @Test(dataProvider = "simpleCoinVsCurrency", dataProviderClass = Data.class)
+    @Test(dataProvider = "dataSingleCoinVsSingleCurrency", dataProviderClass = Data.class)
     public void SIMPLE_getSimplePrice_requiredQueryParamOnly(String coinId, String currency){
             given()
                     //Required query param
                     .queryParam("ids",coinId).queryParam("vs_currencies",currency)
                     .when()
-                        .get(SIMPLE_URI)
+                    .get(SIMPLE_URI)
                     .then()
-                        .assertThat().statusCode(200)
-                        .assertThat().contentType(ContentType.JSON)
-                        //Verify body contains ids field
-                        .assertThat().body("",hasKey(coinId))
-                        //Verify ids contain currency field
-                        .assertThat().body(coinId,hasKey(currency));
+                    .assertThat().statusCode(200)
+                    .assertThat().contentType(ContentType.JSON)
+                    //Verify body contains ids field
+                    .assertThat().body("",hasKey(coinId))
+                    //Verify ids contain currency field
+                    .assertThat().body(coinId,hasKey(currency));
     }
 
-    @Test(dataProvider = "simpleCoinVsCurrency", dataProviderClass = Data.class)
+    @Test(dataProvider = "dataSingleCoinVsSingleCurrency", dataProviderClass = Data.class)
     public void SIMPLE_getSimplePrice_additionalQueryParam(String coinId, String currency){
         given()
                 //Required query param

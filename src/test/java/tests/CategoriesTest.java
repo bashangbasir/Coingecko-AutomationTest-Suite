@@ -12,32 +12,17 @@ import static org.hamcrest.Matchers.*;
 public class CategoriesTest extends BaseTest {
 
     @Test
-    public void CATEGORIES_getListOfCategories_checkStatusCode_expectHttp200(){
+    public void CATEGORIES_getListOfCategories(){
         given()
                 .when()
-                    .get(CATEGORIES_URI)
+                .get(CATEGORIES_URI)
                 .then()
-                    .assertThat().statusCode(200);
+                .assertThat().statusCode(200)
+                .assertThat().contentType(ContentType.JSON)
+                //Verify body has name and catogery_id field.
+                .assertThat().body("[0]",hasKey("name"))
+                .assertThat().body("[0]",hasKey("category_id"));
     }
 
-    @Test
-    public void CATEGORIES_getListOfCategories_checkContentType_expectApplicationJson(){
-        given()
-                .when()
-                    .get(CATEGORIES_URI)
-                .then()
-                    .assertThat().contentType(ContentType.JSON);
-    }
-
-    @Test
-    public void CATEGORIES_getListOfCategories_checkResponse_expectToHaveNameAndCategoryId(){
-        given()
-                .when()
-                    .get(CATEGORIES_URI)
-                .then()
-                // Check the response contains name and category_id
-                    .assertThat().body("[0]",hasKey("name"))
-                    .assertThat().body("[0]",hasKey("category_id"));
-    }
 
 }

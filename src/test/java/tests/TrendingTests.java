@@ -11,31 +11,16 @@ import static org.hamcrest.Matchers.*;
 public class TrendingTests extends BaseTest {
 
     @Test
-    public void TRENDING_checkStatusCode_expectHttp200(){
+    public void TRENDING_getTrendingSearchedCoin(){
         given()
                 .when()
-                    .get(TRENDING_URI)
+                .get(TRENDING_URI)
                 .then()
-                    .assertThat().statusCode(200);
+                .assertThat().statusCode(200)
+                .assertThat().contentType(ContentType.JSON)
+                //Verify the body got 7 array of coins
+                .assertThat().body("coins",hasSize(7));
     }
 
-    @Test
-    public void TRENDING_checkContentType_expectApplicationJson(){
-        given()
-                .when()
-                    .get(TRENDING_URI)
-                .then()
-                    .assertThat().contentType(ContentType.JSON);
-    }
-
-    @Test
-    public void TRENDING_checkCoinsInResponse_expectTopSevenCoins(){
-        given()
-                .when()
-                    .get(TRENDING_URI)
-                .then()
-                //Check there are 7 top coin in the response
-                    .assertThat().body("coins",hasSize(7));
-    }
 
 }
