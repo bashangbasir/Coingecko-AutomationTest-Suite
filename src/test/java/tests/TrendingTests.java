@@ -4,7 +4,7 @@ import base.BaseTest;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
-import static enums.URIConstant.TRENDING_URI;
+import static constants.URIConstant.TRENDING_URI;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 

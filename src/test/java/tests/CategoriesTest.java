@@ -2,12 +2,9 @@ package tests;
 
 import base.BaseTest;
 import io.restassured.http.ContentType;
-import org.hamcrest.collection.HasItemInArray;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static enums.URIConstant.CATEGORIES_URI;
+import static constants.URIConstant.CATEGORIES_URI;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
