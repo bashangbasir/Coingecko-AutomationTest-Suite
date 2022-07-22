@@ -33,8 +33,8 @@ public class Data {
     @DataProvider(name = "dataMultipleCoinsVsMultipleCurrencies")
     public Object[][] dataMultipleCoinsVsMultipleCurrencies(){
         return new Object[][]{
-                {Arrays.asList("bitcoin", "ripple", "etherium"),Arrays.asList("myr", "btc", "usd")},
-                {Arrays.asList("bitcoin", "ripple", "etherium"),Arrays.asList("myr", "btc", "usd")}
+                {Arrays.asList("bitcoin", "ripple", "tether"),Arrays.asList("myr", "btc", "usd")},
+                {Arrays.asList("dogecoin", "polkadot", "solana"),Arrays.asList("myr", "btc", "usd")}
         };
     }
 }

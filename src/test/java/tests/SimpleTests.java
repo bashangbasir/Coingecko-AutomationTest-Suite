@@ -100,4 +100,35 @@ public class SimpleTests extends BaseTest {
                 .assertThat().body((String)coins.get(2),hasKey(currency));
     }
 
+    @Test(dataProvider = "dataMultipleCoinsVsMultipleCurrencies", dataProviderClass = Data.class)
+    public void SIMPLE_getSimplePrice_multipleCoinsVsMultipleCurrencies_requiredQueryParamOnly(List coins, List currencies){
+
+        String coinIds = CommonUtils.parseListToStringCommaSeparated(coins);
+        String vsCurrencies = CommonUtils.parseListToStringCommaSeparated(currencies);
+
+        given()
+                //Required query param
+                .queryParam("ids",coinIds)
+                .queryParam("vs_currencies",vsCurrencies)
+                .when()
+                .get(SIMPLE_URI)
+                .then()
+                .assertThat().statusCode(200)
+                .assertThat().contentType(ContentType.JSON)
+                //Verify body contains ids field
+                .assertThat().body("",hasKey(coins.get(0)))
+                .assertThat().body("",hasKey(coins.get(1)))
+                .assertThat().body("",hasKey(coins.get(2)))
+                //Verify each coin contains all currency field
+                .assertThat().body((String)coins.get(0),hasKey(currencies.get(0)))
+                .assertThat().body((String)coins.get(0),hasKey(currencies.get(1)))
+                .assertThat().body((String)coins.get(0),hasKey(currencies.get(2)))
+                .assertThat().body((String)coins.get(1),hasKey(currencies.get(0)))
+                .assertThat().body((String)coins.get(1),hasKey(currencies.get(1)))
+                .assertThat().body((String)coins.get(1),hasKey(currencies.get(2)))
+                .assertThat().body((String)coins.get(2),hasKey(currencies.get(0)))
+                .assertThat().body((String)coins.get(2),hasKey(currencies.get(1)))
+                .assertThat().body((String)coins.get(2),hasKey(currencies.get(2)));
+    }
+
 }
