@@ -6,7 +6,7 @@
             <class name="tests.CategoriesTest"/>
             <class name="tests.PingTest"/>
             <class name="tests.SimpleTests"/>
-            <class name="tests.TrendingTests"></class>
+            <class name="tests.TrendingTests"/>
         </classes>
     </test>
 </suite>
