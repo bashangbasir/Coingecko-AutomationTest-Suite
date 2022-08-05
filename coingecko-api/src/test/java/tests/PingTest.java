@@ -1,7 +1,6 @@
 package tests;
 
 import base.BaseTest;
-import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
 import static constants.URIConstant.PING_URI;
@@ -17,10 +16,7 @@ public class PingTest extends BaseTest {
                 .when()
                 .get(PING_URI)
                 .then()
-                //Verify status code 200
-                .assertThat().statusCode(200)
-                //Verify content type - application/json
-                .assertThat().contentType(ContentType.JSON)
+                .spec(statusCode200responseSpec)
                 .assertThat().body("'gecko_says'",equalTo("(V3) To the Moon!"));
     }
 }

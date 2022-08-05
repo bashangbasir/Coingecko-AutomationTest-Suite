@@ -3,7 +3,6 @@ package tests;
 import base.BaseTest;
 import base.Data;
 import utils.CommonUtils;
-import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -22,8 +21,7 @@ public class SimpleTests extends BaseTest {
                     .when()
                     .get(SIMPLE_URI)
                     .then()
-                    .assertThat().statusCode(200)
-                    .assertThat().contentType(ContentType.JSON)
+                    .spec(statusCode200responseSpec)
                     //Verify body contains ids field
                     .assertThat().body("",hasKey(coinId))
                     //Verify ids contain currency field
@@ -43,8 +41,7 @@ public class SimpleTests extends BaseTest {
                 .when()
                 .get(SIMPLE_URI)
                 .then()
-                .assertThat().statusCode(200)
-                .assertThat().contentType(ContentType.JSON)
+                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("",hasKey(coinId))
                 //Verify ids contains all field
@@ -66,8 +63,7 @@ public class SimpleTests extends BaseTest {
                 .when()
                 .get(SIMPLE_URI)
                 .then()
-                .assertThat().statusCode(200)
-                .assertThat().contentType(ContentType.JSON)
+                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("",hasKey(coinId))
                 //Verify each coin contains all currency field
@@ -88,8 +84,7 @@ public class SimpleTests extends BaseTest {
                 .when()
                 .get(SIMPLE_URI)
                 .then()
-                .assertThat().statusCode(200)
-                .assertThat().contentType(ContentType.JSON)
+                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("",hasKey(coins.get(0)))
                 .assertThat().body("",hasKey(coins.get(1)))
@@ -113,8 +108,7 @@ public class SimpleTests extends BaseTest {
                 .when()
                 .get(SIMPLE_URI)
                 .then()
-                .assertThat().statusCode(200)
-                .assertThat().contentType(ContentType.JSON)
+                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("",hasKey(coins.get(0)))
                 .assertThat().body("",hasKey(coins.get(1)))

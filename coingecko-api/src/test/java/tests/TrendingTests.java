@@ -1,7 +1,6 @@
 package tests;
 
 import base.BaseTest;
-import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
 import static constants.URIConstant.TRENDING_URI;
@@ -16,8 +15,7 @@ public class TrendingTests extends BaseTest {
                 .when()
                 .get(TRENDING_URI)
                 .then()
-                .assertThat().statusCode(200)
-                .assertThat().contentType(ContentType.JSON)
+                .spec(statusCode200responseSpec)
                 //Verify the body got 7 array of coins
                 .assertThat().body("coins",hasSize(7));
     }
