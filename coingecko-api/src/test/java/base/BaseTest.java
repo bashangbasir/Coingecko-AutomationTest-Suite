@@ -9,8 +9,9 @@ import org.testng.annotations.BeforeClass;
 public class BaseTest {
     public static ResponseSpecification statusCode200responseSpec;
     public static ResponseSpecification statusCode400responseSpec;
+
     @BeforeClass
-    public static void createStatusCode200ResponseSpecs(){
+    public static void createStatusCode200ResponseSpecs() {
         statusCode200responseSpec = new ResponseSpecBuilder().
                 expectStatusCode(200).
                 expectContentType(ContentType.JSON).
@@ -18,7 +19,7 @@ public class BaseTest {
     }
 
     @BeforeClass
-    public static void createStatusCode400ResponseSpecs(){
+    public static void createStatusCode400ResponseSpecs() {
         statusCode400responseSpec = new ResponseSpecBuilder().
                 expectStatusCode(400).
                 expectContentType(ContentType.JSON).
@@ -26,7 +27,7 @@ public class BaseTest {
     }
 
     @AfterSuite
-    public void cleanup(){
+    public void cleanup() {
 
     }
 }

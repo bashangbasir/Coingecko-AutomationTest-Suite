@@ -10,14 +10,14 @@ import static org.hamcrest.Matchers.*;
 public class TrendingTests extends BaseTest {
 
     @Test
-    public void TRENDING_getTrendingSearchedCoin(){
+    public void TRENDING_getTrendingSearchedCoin() {
         given()
                 .when()
                 .get(TRENDING_URI)
                 .then()
                 .spec(statusCode200responseSpec)
                 //Verify the body got 7 array of coins
-                .assertThat().body("coins",hasSize(7));
+                .assertThat().body("coins", hasSize(7));
     }
 
 

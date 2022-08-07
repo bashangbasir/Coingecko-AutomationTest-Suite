@@ -11,12 +11,12 @@ import static org.hamcrest.Matchers.*;
 public class PingTest extends BaseTest {
 
     @Test
-    public void PING_serverStatus(){
+    public void PING_serverStatus() {
         given()
                 .when()
                 .get(PING_URI)
                 .then()
                 .spec(statusCode200responseSpec)
-                .assertThat().body("'gecko_says'",equalTo("(V3) To the Moon!"));
+                .assertThat().body("'gecko_says'", equalTo("(V3) To the Moon!"));
     }
 }
