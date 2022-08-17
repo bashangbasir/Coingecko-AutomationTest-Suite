@@ -11,7 +11,8 @@ import static constants.StringConstant.HomePageTitle;
 public class HomePage {
 
     private WebDriver driver;
-    public HomePage(WebDriver driver){
+
+    public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }
@@ -24,24 +25,23 @@ public class HomePage {
     @FindBy(xpath = "")
     private WebElement candyNotificationIcon;
     @FindBy(id = "cookie-notice")
-    private WebElement cookieModal ;
+    private WebElement cookieModal;
     @FindBy(xpath = "//*[@id='cookie-notice']//button[@data-action='click->cookie-note#accept']")
-    private WebElement cookieModalOkayBtn ;
+    private WebElement cookieModalOkayBtn;
 
     // ACTIONS IN HOMEPAGE
 
-    public HomePage verifyHomePageTittle(){
-       Assert.assertEquals(driver.getTitle() , HomePageTitle);
-       return this;
+    public HomePage verifyHomePageTittle() {
+        Assert.assertEquals(driver.getTitle(), HomePageTitle);
+        return this;
     }
 
-    public HomePage clearCookiesModal(){
-        if(cookieModal.isDisplayed()){
+    public HomePage clearCookiesModal() {
+        if (cookieModal.isDisplayed()) {
             cookieModalOkayBtn.click();
         }
         return this;
     }
-
 
 
 }
