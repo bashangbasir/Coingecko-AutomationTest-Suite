@@ -12,8 +12,8 @@ public class LoadPageTest extends BaseTest {
     @Test
     public void loadCoingeckoHompage(){
 
-        String actualTitle = homePage.getHomePageTabTittle();
-        Assert.assertEquals(actualTitle, HomePageTitle);
+        homePage.
+                verifyHomePageTittle();
 
     }
 
