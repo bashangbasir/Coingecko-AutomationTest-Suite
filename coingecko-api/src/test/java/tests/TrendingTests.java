@@ -4,8 +4,8 @@ import base.BaseTest;
 import org.testng.annotations.Test;
 
 import static constants.URIConstant.TRENDING_URI;
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasSize;
 
 public class TrendingTests extends BaseTest {
 

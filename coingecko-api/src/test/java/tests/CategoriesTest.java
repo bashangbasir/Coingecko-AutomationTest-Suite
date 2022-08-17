@@ -6,9 +6,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.CommonUtils;
 
-import static constants.URIConstant.*;
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static constants.URIConstant.CATEGORIES_URI;
+import static constants.URIConstant.LIST_CATEGORIES_URI;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasKey;
 
 
 public class CategoriesTest extends BaseTest {

@@ -2,8 +2,8 @@ package tests;
 
 import base.BaseTest;
 import base.Data;
-import utils.CommonUtils;
 import org.testng.annotations.Test;
+import utils.CommonUtils;
 
 import java.util.List;
 
