@@ -22,6 +22,7 @@ public class SimpleTests extends BaseTest {
 
         sendGet(SIMPLE_URI, queryParams)
                 .then()
+                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coinId))
                 //Verify ids contain currency field
@@ -41,6 +42,7 @@ public class SimpleTests extends BaseTest {
 
         sendGet(SIMPLE_URI, queryParams)
                 .then()
+                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coinId))
                 //Verify ids contains all field
@@ -62,6 +64,7 @@ public class SimpleTests extends BaseTest {
 
         sendGet(SIMPLE_URI, queryParams)
                 .then()
+                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coinId))
                 //Verify each coin contains all currency field
@@ -81,6 +84,7 @@ public class SimpleTests extends BaseTest {
 
         sendGet(SIMPLE_URI, queryParams)
                 .then()
+                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coins.get(0)))
                 .assertThat().body("", hasKey(coins.get(1)))
@@ -103,6 +107,7 @@ public class SimpleTests extends BaseTest {
 
         sendGet(SIMPLE_URI, queryParams)
                 .then()
+                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coins.get(0)))
                 .assertThat().body("", hasKey(coins.get(1)))

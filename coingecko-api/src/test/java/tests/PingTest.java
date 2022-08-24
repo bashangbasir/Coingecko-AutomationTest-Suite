@@ -13,6 +13,7 @@ public class PingTest extends BaseTest {
     public void PING_serverStatus() {
         sendGet(PING_URI)
                 .then()
+                .spec(statusCode200responseSpec)
                 .assertThat().body("'gecko_says'", equalTo("(V3) To the Moon!"));
     }
 }

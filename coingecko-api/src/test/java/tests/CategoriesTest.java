@@ -114,7 +114,10 @@ public class CategoriesTest extends BaseTest {
         Map<String, Object> queryParams = new HashMap<>();
         queryParams.put("order", "market_cap_change_24h_asc");
 
-        Response response = sendGet(CATEGORIES_URI, queryParams);
+        Response response = sendGet(CATEGORIES_URI, queryParams)
+                .then()
+                .spec(statusCode200responseSpec)
+                .extract().response();
 
         float firstCategoryMarketCapChange24h = response.jsonPath().get("[0].market_cap_change_24h");
         float secondCategoryMarketCapChange24h = response.jsonPath().get("[1].market_cap_change_24h");
@@ -128,7 +131,10 @@ public class CategoriesTest extends BaseTest {
         queryParams.put("order", "market_cap_change_24h_desc");
 
 
-        Response response = sendGet(CATEGORIES_URI, queryParams);
+        Response response = sendGet(CATEGORIES_URI, queryParams)
+                .then()
+                .spec(statusCode200responseSpec)
+                .extract().response();
 
         float firstCategoryMarketCapChange24h = response.jsonPath().get("[0].market_cap_change_24h");
         float secondCategoryMarketCapChange24h = response.jsonPath().get("[1].market_cap_change_24h");
