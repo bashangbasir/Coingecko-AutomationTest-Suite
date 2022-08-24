@@ -9,6 +9,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import pages.HomePage;
 
+import java.util.concurrent.TimeUnit;
+
 public class BaseTest {
 
     private WebDriver driver;
@@ -16,7 +18,7 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"URL", "browser"})
-    public void setUp(String URL, String browser) {
+    public void setUp(@Optional("https://www.coingecko.com/") String URL, @Optional("Chrome") String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
             driver = new ChromeDriver();
@@ -26,8 +28,10 @@ public class BaseTest {
         }
 
         homePage = new HomePage(driver);
-
+        //Set implicit wait, maximize window
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+
         driver.get(URL);
     }
 
