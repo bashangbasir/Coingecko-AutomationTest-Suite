@@ -6,9 +6,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.CommonUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static constants.URIConstant.CATEGORIES_URI;
 import static constants.URIConstant.LIST_CATEGORIES_URI;
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasKey;
 
@@ -17,9 +19,7 @@ public class CategoriesTest extends BaseTest {
 
     @Test
     public void CATEGORIES_getListAllCategories() {
-        given()
-                .when()
-                .get(LIST_CATEGORIES_URI)
+        sendGet(LIST_CATEGORIES_URI)
                 .then()
                 .spec(statusCode200responseSpec)
                 //Verify body has name and catogery_id field.
@@ -29,9 +29,7 @@ public class CategoriesTest extends BaseTest {
 
     @Test
     public void CATEGORIES_getListAllCategoriesWithMarketDataWithDefaultOrder() {
-        Response response = given()
-                .when()
-                .get(CATEGORIES_URI)
+        Response response = sendGet(CATEGORIES_URI)
                 .then()
                 .spec(statusCode200responseSpec)
                 .extract().response();
@@ -45,10 +43,10 @@ public class CategoriesTest extends BaseTest {
 
     @Test
     public void CATEGORIES_getListAllCategoriesWithMarketDataOrderMarketCapAscending() {
-        Response response = given()
-                .queryParam("order", "market_cap_asc")
-                .when()
-                .get(CATEGORIES_URI)
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("order", "market_cap_asc");
+
+        Response response = sendGet(CATEGORIES_URI, queryParams)
                 .then()
                 .spec(statusCode200responseSpec)
                 .extract().response();
@@ -61,10 +59,11 @@ public class CategoriesTest extends BaseTest {
 
     @Test
     public void CATEGORIES_getListAllCategoriesWithMarketDataOrderMarketCapDescending() {
-        Response response = given()
-                .queryParam("order", "market_cap_desc")
-                .when()
-                .get(CATEGORIES_URI)
+
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("order", "market_cap_desc");
+
+        Response response = sendGet(CATEGORIES_URI, queryParams)
                 .then()
                 .spec(statusCode200responseSpec)
                 .extract().response();
@@ -78,10 +77,10 @@ public class CategoriesTest extends BaseTest {
     // name_desc,
     @Test
     public void CATEGORIES_getListAllCategoriesWithMarketDataOrderNameAscending() {
-        Response response = given()
-                .queryParam("order", "name_asc")
-                .when()
-                .get(CATEGORIES_URI)
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("order", "name_asc");
+
+        Response response = sendGet(CATEGORIES_URI, queryParams)
                 .then()
                 .spec(statusCode200responseSpec)
                 .extract().response();
@@ -95,10 +94,10 @@ public class CategoriesTest extends BaseTest {
 
     @Test
     public void CATEGORIES_getListAllCategoriesWithMarketDataOrderNameDescending() {
-        Response response = given()
-                .queryParam("order", "name_desc")
-                .when()
-                .get(CATEGORIES_URI)
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("order", "name_desc");
+
+        Response response = sendGet(CATEGORIES_URI, queryParams)
                 .then()
                 .spec(statusCode200responseSpec)
                 .extract().response();
@@ -112,13 +111,10 @@ public class CategoriesTest extends BaseTest {
 
     @Test
     public void CATEGORIES_getListAllCategoriesWithMarketDataOrderMarketCapChange24hAscending() {
-        Response response = given()
-                .queryParam("order", "market_cap_change_24h_asc")
-                .when()
-                .get(CATEGORIES_URI)
-                .then()
-                .spec(statusCode200responseSpec)
-                .extract().response();
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("order", "market_cap_change_24h_asc");
+
+        Response response = sendGet(CATEGORIES_URI, queryParams);
 
         float firstCategoryMarketCapChange24h = response.jsonPath().get("[0].market_cap_change_24h");
         float secondCategoryMarketCapChange24h = response.jsonPath().get("[1].market_cap_change_24h");
@@ -128,13 +124,11 @@ public class CategoriesTest extends BaseTest {
 
     @Test
     public void CATEGORIES_getListAllCategoriesWithMarketDataOrderMarketCapChange24hDescending() {
-        Response response = given()
-                .queryParam("order", "market_cap_change_24h_desc")
-                .when()
-                .get(CATEGORIES_URI)
-                .then()
-                .spec(statusCode200responseSpec)
-                .extract().response();
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("order", "market_cap_change_24h_desc");
+
+
+        Response response = sendGet(CATEGORIES_URI, queryParams);
 
         float firstCategoryMarketCapChange24h = response.jsonPath().get("[0].market_cap_change_24h");
         float secondCategoryMarketCapChange24h = response.jsonPath().get("[1].market_cap_change_24h");
@@ -144,11 +138,10 @@ public class CategoriesTest extends BaseTest {
 
     @Test
     public void CATEGORIES_getListAllCategoriesWithMarketDataWrongOrderValue() {
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("order", CommonUtils.getRandomCharacters(6));
 
-        given()
-                .queryParam("order", CommonUtils.getRandomCharacters(6))
-                .when()
-                .get(CATEGORIES_URI)
+        sendGet(CATEGORIES_URI, queryParams)
                 .then()
                 .spec(statusCode400responseSpec)
                 .assertThat().body("'error'", equalTo("invalid parameter"));

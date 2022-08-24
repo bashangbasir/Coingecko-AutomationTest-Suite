@@ -5,23 +5,23 @@ import base.Data;
 import org.testng.annotations.Test;
 import utils.CommonUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static constants.URIConstant.SIMPLE_URI;
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasKey;
 
 public class SimpleTests extends BaseTest {
 
     @Test(dataProvider = "dataSingleCoinVsSingleCurrency", dataProviderClass = Data.class)
     public void SIMPLE_getSimplePrice_singleCoinVsSingleCurrency_requiredQueryParamOnly(String coinId, String currency) {
-        given()
-                //Required query param
-                .queryParam("ids", coinId).queryParam("vs_currencies", currency)
-                .when()
-                .get(SIMPLE_URI)
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("ids", coinId);
+        queryParams.put("vs_currencies", currency);
+
+        sendGet(SIMPLE_URI, queryParams)
                 .then()
-                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coinId))
                 //Verify ids contain currency field
@@ -30,18 +30,17 @@ public class SimpleTests extends BaseTest {
 
     @Test(dataProvider = "dataSingleCoinVsSingleCurrency", dataProviderClass = Data.class)
     public void SIMPLE_getSimplePrice_singleCoinVsSingleCurrency_additionalQueryParam(String coinId, String currency) {
-        given()
-                //Required query param
-                .queryParam("ids", coinId).queryParam("vs_currencies", currency)
-                //additional query param
-                .queryParam("include_market_cap", "true")
-                .queryParam("include_24hr_vol", "true")
-                .queryParam("include_24hr_change", "true")
-                .queryParam("include_last_updated_at", "true")
-                .when()
-                .get(SIMPLE_URI)
+
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("ids", coinId);
+        queryParams.put("vs_currencies", currency);
+        queryParams.put("include_market_cap", "true");
+        queryParams.put("include_24hr_vol", "true");
+        queryParams.put("include_24hr_change", "true");
+        queryParams.put("include_last_updated_at", "true");
+
+        sendGet(SIMPLE_URI, queryParams)
                 .then()
-                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coinId))
                 //Verify ids contains all field
@@ -57,13 +56,12 @@ public class SimpleTests extends BaseTest {
 
         String vsCurrencies = CommonUtils.parseListToStringCommaSeparated(currencies);
 
-        given()
-                //Required query param
-                .queryParam("ids", coinId).queryParam("vs_currencies", vsCurrencies)
-                .when()
-                .get(SIMPLE_URI)
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("ids", coinId);
+        queryParams.put("vs_currencies", vsCurrencies);
+
+        sendGet(SIMPLE_URI, queryParams)
                 .then()
-                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coinId))
                 //Verify each coin contains all currency field
@@ -77,14 +75,12 @@ public class SimpleTests extends BaseTest {
 
         String coinIds = CommonUtils.parseListToStringCommaSeparated(coins);
 
-        given()
-                //Required query param
-                .queryParam("ids", coinIds)
-                .queryParam("vs_currencies", currency)
-                .when()
-                .get(SIMPLE_URI)
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("ids", coinIds);
+        queryParams.put("vs_currencies", currency);
+
+        sendGet(SIMPLE_URI, queryParams)
                 .then()
-                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coins.get(0)))
                 .assertThat().body("", hasKey(coins.get(1)))
@@ -101,14 +97,12 @@ public class SimpleTests extends BaseTest {
         String coinIds = CommonUtils.parseListToStringCommaSeparated(coins);
         String vsCurrencies = CommonUtils.parseListToStringCommaSeparated(currencies);
 
-        given()
-                //Required query param
-                .queryParam("ids", coinIds)
-                .queryParam("vs_currencies", vsCurrencies)
-                .when()
-                .get(SIMPLE_URI)
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("ids", coinIds);
+        queryParams.put("vs_currencies", vsCurrencies);
+
+        sendGet(SIMPLE_URI, queryParams)
                 .then()
-                .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coins.get(0)))
                 .assertThat().body("", hasKey(coins.get(1)))
