@@ -6,6 +6,7 @@
     <test name="All test cases in web module">
         <classes>
             <class name="tests.LoadPageTest"/>
+            <class name="tests.LoginTest"/>
         </classes>
     </test>
 </suite>
