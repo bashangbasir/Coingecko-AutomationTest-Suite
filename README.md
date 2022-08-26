@@ -5,7 +5,7 @@ Pre-Requisites:
 
 - Install JDK 8 (version 1.8.0_321)
 - Install IDE (preferred IntelliJ IDEA)
-- Install Appium
+- Install Appium : [link](https://support.smartbear.com/testcomplete/docs/app-testing/mobile/device-cloud/configure-appium/index.html)
 
 How to run the test : 
 1. For API testss: 
