@@ -10,9 +10,28 @@ public class LoginTest extends BaseTest {
 
         homePage.clearCookiesModal()
                 .verifyHomePageTittle()
-                .userLogin("<youremail@email.com>","<password>")
+                .userLoginWithValidData("confirmemailtester@gmail.com","TestPassword@123")
                 .verifySignedInMessageSuccess()
                 .userSignOut()
                 .verifySignedOutMessageSuccess();
+    }
+
+    @Test
+    public void userLoginWithInvalidDetails(){
+        homePage.clearCookiesModal()
+                .verifyHomePageTittle()
+                .userLoginWithInvalidData("<youremail@email.com>","<password>")
+                .verifySignInPageTittle()
+                .verifySignInErrorMessage();
+    }
+
+    @Test
+    public void userLoginWithUnconfirmedEmails() {
+
+        homePage.clearCookiesModal()
+                .verifyHomePageTittle()
+                .userLoginWithInvalidData("valid@email.com","Valid@123")
+                .verifySignInPageTittle()
+                .verifyUnconfirmedEmailMessage();
     }
 }
