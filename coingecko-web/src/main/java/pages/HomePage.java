@@ -67,12 +67,20 @@ public class HomePage {
         return this;
     }
 
-    public HomePage userLogin(String email,String password){
+    public HomePage userLoginWithValidData(String email,String password){
         loginBtn.click();
         emailTextBox.sendKeys(email);
         passwordTextBox.sendKeys(password);
         signInBtn.click();
         return this;
+    }
+
+    public SignInPage userLoginWithInvalidData(String email, String password) {
+        loginBtn.click();
+        emailTextBox.sendKeys(email);
+        passwordTextBox.sendKeys(password);
+        signInBtn.click();
+        return new SignInPage(driver);
     }
 
     public HomePage verifySignedInMessageSuccess(){
@@ -95,7 +103,6 @@ public class HomePage {
         driver.navigate().refresh();
         return this;
     }
-
 
 
 
