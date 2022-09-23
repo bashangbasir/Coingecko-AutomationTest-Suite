@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class LoadPageTest extends BaseTest {
 
     @Test
-    public void loadCoinGeckoHomepage() {
+    public void LOAD_loadCoinGeckoHomepage() {
 
         homePage.
                 clearCookiesModal().
