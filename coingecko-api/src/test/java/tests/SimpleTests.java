@@ -1,7 +1,7 @@
 package tests;
 
 import base.BaseTest;
-import base.Data;
+import constants.Data;
 import org.testng.annotations.Test;
 import utils.CommonUtils;
 

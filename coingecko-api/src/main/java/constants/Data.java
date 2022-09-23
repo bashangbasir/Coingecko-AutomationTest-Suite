@@ -1,4 +1,4 @@
-package base;
+package constants;
 
 import org.testng.annotations.DataProvider;
 
