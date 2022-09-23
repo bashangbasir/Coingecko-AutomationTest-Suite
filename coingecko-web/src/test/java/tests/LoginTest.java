@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest {
 
     @Test
-    public void userLoginWithValidDetails() {
+    public void LOGIN_userLoginWithValidDetails() {
 
         homePage.clearCookiesModal()
                 .verifyHomePageTittle()
@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void userLoginWithInvalidDetails(){
+    public void LOGIN_userLoginWithInvalidDetails(){
         homePage.clearCookiesModal()
                 .verifyHomePageTittle()
                 .userLoginWithInvalidData("<youremail@email.com>","<password>")
@@ -26,7 +26,7 @@ public class LoginTest extends BaseTest {
     }
 
     @Test
-    public void userLoginWithUnconfirmedEmails() {
+    public void LOGIN_userLoginWithUnconfirmedEmails() {
 
         homePage.clearCookiesModal()
                 .verifyHomePageTittle()
