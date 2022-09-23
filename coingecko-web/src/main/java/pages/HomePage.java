@@ -1,17 +1,17 @@
 package pages;
 
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import utils.WebApiUtils;
 
 import java.util.List;
 
 import static constants.StringConstant.*;
 
-public class HomePage {
+public class HomePage extends WebApiUtils {
 
     private WebDriver driver;
 
@@ -32,10 +32,10 @@ public class HomePage {
     @FindBy(xpath = "//*[@id='cookie-notice']//button[@data-action='click->cookie-note#accept']")
     private WebElement cookieModalOkayBtn;
 
-    @FindBy(xpath = "//div/a[@class=\"mr-3 text-black tw-text-sm\" and contains(text(),\"Login\")]")
+    @FindBy(xpath = "//div/a[@class='mr-3 text-black tw-text-sm' and contains(text(),'Login')]")
     private WebElement loginBtn;
 
-    @FindBy(xpath = "//div/a[@class=\"text-black mr-1 tw-text-sm\" and contains(text(),\"Sign Up\")]")
+    @FindBy(xpath = "//div/a[@class='text-black mr-1 tw-text-sm' and contains(text(),'Sign Up')]")
     private WebElement signUpBtn;
 
     @FindBy(id = "signInEmail")
@@ -47,17 +47,20 @@ public class HomePage {
     @FindBy(id ="sign-in-button")
     private WebElement signInBtn;
 
-    @FindBy(xpath = "//div[@class= \"unobtrusive-flash-message\"]")
+    @FindBy(xpath = "//div[@class= 'unobtrusive-flash-message']")
     private WebElement signedInSignedOutMessage;
 
     @FindBy(css = " a.text-black > i.fas.fa-user")
     private WebElement humanIcon;
 
-    @FindBy(xpath = " //div/a[@href=\"/account/sign_out?locale=en\" and @class=\"dropdown-item py-2 tw-text-sm\"]")
+    @FindBy(xpath = " //div/a[@href='/account/sign_out?locale=en' and @class='dropdown-item py-2 tw-text-sm']")
     private WebElement signOutBtn;
 
-    @FindBy(xpath = "//div[@class='tw-truncate' and contains(text(),'Search')]")
+    @FindBy(xpath = "//div[@data-action='click->desktop-search-popup#showSearchPopup']")
     private WebElement searchBox;
+
+    @FindBy(xpath = "//input[@placeholder='Search token name or exchange']")
+    private WebElement searchInput;
 
     @FindBy(xpath = "//div[contains(text(),'Trending Search')]")
     private WebElement trendingText;
@@ -70,6 +73,10 @@ public class HomePage {
 
     @FindBy(xpath = "//ul[@class='list-reset relevant-results']/li")
     private List<WebElement> listOfTrendingCoins;
+
+    @FindBy(xpath = "//ul[@class='list-reset relevant-results']/li")
+    private List<WebElement> searchedCoins;
+
 
     // ACTIONS IN HOMEPAGE
 
@@ -129,14 +136,18 @@ public class HomePage {
         return this;
     }
 
-    public CoinPage search(String searchedString){
-        //TODO - currently this method throwing error for sendKeys()
-        searchBox.click();
-        searchBox.sendKeys(searchedString + Keys.ENTER);
+    public HomePage userSearch(String searchedString){
+        searchInput.sendKeys(searchedString);
+        return this;
+    }
+
+    public CoinPage selectFirstSearchResult(){
+        searchedCoins.get(0).click();
         return new CoinPage(driver);
     }
 
     public HomePage refreshPage(){
+
         driver.navigate().refresh();
         return this;
     }
