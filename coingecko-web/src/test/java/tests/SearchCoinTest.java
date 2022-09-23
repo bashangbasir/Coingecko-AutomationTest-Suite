@@ -1,6 +1,7 @@
 package tests;
 
 import base.BaseTest;
+import constants.Data;
 import org.testng.annotations.Test;
 
 public class SearchCoinTest extends BaseTest {
@@ -16,18 +17,21 @@ public class SearchCoinTest extends BaseTest {
                 .verifyTrendingCoinsExist();
     }
 
-    @Test
-    public void SEARCH_searchBitcoin() {
-
-        String searchedString = "bitcoin";
+    @Test(dataProvider = "coins", dataProviderClass = Data.class)
+    public void SEARCH_searchCoin(String coins) throws Exception {
 
         homePage.clearCookiesModal()
                 .verifyHomePageTittle()
                 .userLoginWithValidData("confirmemailtester@gmail.com","TestPassword@123")
                 .verifySignedInMessageSuccess()
-                .search(searchedString)
-                .verifyCoinNameInBreadcrumb(searchedString);
-        //TODO - currently failing since search() method throwing error -> org.openqa.selenium.ElementNotInteractableException: element not interactable
+                .clickSearchTextBox()
+                .verifyTrendingCoinsExist()
+                .userSearch(coins);
+
+        Thread.sleep(500); // need to improve this code. Use wait maybe instead of sleep.
+
+        homePage.selectFirstSearchResult()
+                .verifyCoinNameInBreadcrumb(coins);
     }
 
 }
