@@ -20,7 +20,7 @@ public class CoinPage {
 
 
     public CoinPage verifyCoinNameInBreadcrumb(String searchedString){
-        Assert.assertTrue(coinNameBreadcrumb.getText().contains(searchedString + " Price"));
+        Assert.assertTrue(coinNameBreadcrumb.getText().equalsIgnoreCase(searchedString + " price"),"Actual : " + coinNameBreadcrumb.getText() + " - Expected : " + searchedString + " price" );
         return this;
     }
 
