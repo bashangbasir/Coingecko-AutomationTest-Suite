@@ -1,0 +1,21 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [push]
+jobs:
+  run-test:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+        
+      - name: Install Java and Maven
+        uses: actions/setup-java@v1
+        with:
+          java-version: 8
+          
+      - name: Run Test
+        run: mvn test -f coingecko-api
+          
+          
+        
+    
