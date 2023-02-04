@@ -15,6 +15,6 @@ How to run the test :
   `run coingecko-web/testng-web.xml`
   
 3. For Mobile tests:
-  `run coingecko-mobile/testng-mobile.xml`
+  `run coingecko-mobile/testng-mobile.xml` - NOT DONE YET
   
   
