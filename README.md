@@ -16,7 +16,7 @@ How to run the test :
 
 Note : the web will be block if run multiple times. Do at your own risk.
   
-4. For Mobile tests:
+3. For Mobile tests:
   `run coingecko-mobile/testng-mobile.xml` - NOT DONE YET
   
   
