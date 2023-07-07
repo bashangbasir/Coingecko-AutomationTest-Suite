@@ -16,7 +16,7 @@ public class CommonUtils {
             int index = (new Random()).nextInt("ABCDEFGHIJKLMNOPQRSTUVWXYZ".length());
             rndString.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(index));
         }
-        return rndString.toString().toString();
+        return rndString.toString();
     }
 
     public static String getRandomCharacters() {
@@ -26,7 +26,7 @@ public class CommonUtils {
             int index = (new Random()).nextInt("ABCDEFGHIJKLMNOPQRSTUVWXYZ".length());
             rndString.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(index));
         }
-        return rndString.toString().toString();
+        return rndString.toString();
     }
 
 
