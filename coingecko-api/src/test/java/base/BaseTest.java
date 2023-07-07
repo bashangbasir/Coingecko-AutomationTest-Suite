@@ -36,7 +36,7 @@ public class BaseTest {
     @BeforeClass
     public void pauseForMinute() throws Exception {
         //since the api is public and got rate limit. Hack for 10-30 request/min
-        Thread.sleep(30000);
+        Thread.sleep(60000);
     }
 
     @AfterSuite
