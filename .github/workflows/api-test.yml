@@ -3,7 +3,7 @@ run-name: API testing
 on: [push]
 jobs:
   run-test:
-    runs-on: ubuntu-18.04
+    runs-on:  ubuntu-20.04
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
