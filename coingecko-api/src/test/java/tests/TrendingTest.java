@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import static constants.URIConstant.TRENDING_URI;
 import static org.hamcrest.Matchers.hasSize;
 
-public class TrendingTests extends BaseTest {
+public class TrendingTest extends BaseTest {
 
     @Test
     public void TRENDING_getTrendingSearchedCoin() {

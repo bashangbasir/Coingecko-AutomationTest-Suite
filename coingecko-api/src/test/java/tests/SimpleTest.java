@@ -13,7 +13,7 @@ import java.util.Map;
 import static constants.URIConstant.SIMPLE_URI;
 import static org.hamcrest.Matchers.hasKey;
 
-public class SimpleTests extends BaseTest {
+public class SimpleTest extends BaseTest {
 
     @Test(dataProvider = "dataSingleCoinVsSingleCurrency", dataProviderClass = Data.class)
     public void SIMPLE_getSimplePrice_singleCoinVsSingleCurrency_requiredQueryParamOnly(String coinId, String currency) {

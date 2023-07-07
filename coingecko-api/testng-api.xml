@@ -5,8 +5,8 @@
         <classes>
             <class name="tests.CategoriesTest"/>
             <class name="tests.PingTest"/>
-            <class name="tests.SimpleTests"/>
-            <class name="tests.TrendingTests"/>
+            <class name="tests.SimpleTest"/>
+            <class name="tests.TrendingTest"/>
         </classes>
     </test>
 </suite>
