@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.CommonUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class CategoriesTest extends BaseTest {
         sendGet(LIST_CATEGORIES_URI)
                 .then()
                 .spec(statusCode200responseSpec)
-                //Verify body has name and catogery_id field.
+                //Verify body has name and category_id field.
                 .assertThat().body("[0]", hasKey("name"))
                 .assertThat().body("[0]", hasKey("category_id"));
     }
@@ -51,10 +52,17 @@ public class CategoriesTest extends BaseTest {
                 .spec(statusCode200responseSpec)
                 .extract().response();
 
-        float firstCategoryMarketCap = response.jsonPath().get("[0].market_cap");
-        float secondCategoryMarketCap = response.jsonPath().get("[1].market_cap");
-        float thirdCategoryMarketCap = response.jsonPath().get("[2].market_cap");
-        Assert.assertTrue((firstCategoryMarketCap <= secondCategoryMarketCap) && (secondCategoryMarketCap <= thirdCategoryMarketCap));
+        //market_cap can be null, added condition if null then set 0
+        ArrayList<Float> marketCapValues = new ArrayList<>();
+        for(int i=0; i<3;i++){
+            if(response.jsonPath().get("[" + i + "].market_cap")==null){
+                marketCapValues.add(0.0F);
+            }
+            else{
+                marketCapValues.add(response.jsonPath().get("[" + i + "].market_cap"));
+            }
+        }
+        Assert.assertTrue((marketCapValues.get(0) <= marketCapValues.get(1)) && (marketCapValues.get(1) <= marketCapValues.get(2)));
     }
 
     @Test

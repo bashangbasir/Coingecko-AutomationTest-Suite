@@ -2,6 +2,7 @@ package tests;
 
 import base.BaseTest;
 import constants.Data;
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import utils.CommonUtils;
 
@@ -35,10 +36,10 @@ public class SimpleTests extends BaseTest {
         Map<String, Object> queryParams = new HashMap<>();
         queryParams.put("ids", coinId);
         queryParams.put("vs_currencies", currency);
-        queryParams.put("include_market_cap", "true");
-        queryParams.put("include_24hr_vol", "true");
-        queryParams.put("include_24hr_change", "true");
-        queryParams.put("include_last_updated_at", "true");
+        queryParams.put("include_market_cap", true);
+        queryParams.put("include_24hr_vol", true);
+        queryParams.put("include_24hr_change", true);
+        queryParams.put("include_last_updated_at", true);
 
         sendGet(SIMPLE_URI, queryParams)
                 .then()
@@ -62,15 +63,15 @@ public class SimpleTests extends BaseTest {
         queryParams.put("ids", coinId);
         queryParams.put("vs_currencies", vsCurrencies);
 
-        sendGet(SIMPLE_URI, queryParams)
-                .then()
-                .spec(statusCode200responseSpec)
-                //Verify body contains ids field
-                .assertThat().body("", hasKey(coinId))
+        Response response = sendGet(SIMPLE_URI, queryParams);
+
+        response.then()
+                .spec(statusCode200responseSpec).assertThat().body("", hasKey(coinId))
                 //Verify each coin contains all currency field
                 .assertThat().body(coinId, hasKey((String) currencies.get(0)))
                 .assertThat().body(coinId, hasKey((String) currencies.get(1)))
                 .assertThat().body(coinId, hasKey((String) currencies.get(2)));
+                //Verify body contains ids field
     }
 
     @Test(dataProvider = "dataMultipleCoinVsSingleCurrencies", dataProviderClass = Data.class)
@@ -82,8 +83,9 @@ public class SimpleTests extends BaseTest {
         queryParams.put("ids", coinIds);
         queryParams.put("vs_currencies", currency);
 
-        sendGet(SIMPLE_URI, queryParams)
-                .then()
+        Response response = sendGet(SIMPLE_URI, queryParams);
+
+        response.then()
                 .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coins.get(0)))
@@ -105,8 +107,9 @@ public class SimpleTests extends BaseTest {
         queryParams.put("ids", coinIds);
         queryParams.put("vs_currencies", vsCurrencies);
 
-        sendGet(SIMPLE_URI, queryParams)
-                .then()
+        Response response = sendGet(SIMPLE_URI, queryParams);
+
+        response.then()
                 .spec(statusCode200responseSpec)
                 //Verify body contains ids field
                 .assertThat().body("", hasKey(coins.get(0)))
