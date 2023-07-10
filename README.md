@@ -7,6 +7,11 @@ Pre-Requisites:
 - Install IDE (preferred IntelliJ IDEA)
 - Install Appium : [link](https://support.smartbear.com/testcomplete/docs/app-testing/mobile/device-cloud/configure-appium/index.html)
 
+---
+- Powered by CoinGecko:
+  - api docs : [link](https://www.coingecko.com/en/api/documentation)
+  - mobile app : [download](https://www.coingecko.com/en/mobile)
+---
 How to run the test :
 ---------------------
 1. For API testss: 
