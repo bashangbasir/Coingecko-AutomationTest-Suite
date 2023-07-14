@@ -2,9 +2,15 @@ package tests;
 
 import base.BaseTest;
 import constants.Data;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
+
+    @BeforeMethod(alwaysRun = true)
+    public void verifyHumanCheck() throws Exception {
+        homePage.verifyHumanCheck();
+    }
 
     @Test(dataProvider = "validUser", dataProviderClass = Data.class)
     public void LOGIN_userLoginWithValidDetails(String email, String password) {

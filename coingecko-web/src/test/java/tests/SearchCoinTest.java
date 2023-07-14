@@ -4,9 +4,15 @@ import base.BaseTest;
 import constants.Data;
 import constants.UserRegistry;
 import models.User;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SearchCoinTest extends BaseTest {
+
+    @BeforeMethod(alwaysRun = true)
+    public void verifyHumanCheck() throws Exception {
+        homePage.verifyHumanCheck();
+    }
 
     @Test
     public void SEARCH_trendingCoinDuringSearch() throws Exception {
@@ -32,7 +38,7 @@ public class SearchCoinTest extends BaseTest {
                 .verifyTrendingCoinsExist()
                 .userSearch(coins);
 
-        Thread.sleep(500); // need to improve this code. Use wait maybe instead of sleep.
+        Thread.sleep(1000); // need to improve this code. Use wait maybe instead of sleep.
 
         homePage.selectFirstSearchResult()
                 .verifyCoinNameInBreadcrumb(coins);
