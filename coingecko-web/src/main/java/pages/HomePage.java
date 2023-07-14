@@ -32,10 +32,10 @@ public class HomePage extends WebApiUtils {
     @FindBy(xpath = "//*[@id='cookie-notice']//button[@data-action='click->cookie-note#accept']")
     private WebElement cookieModalOkayBtn;
 
-    @FindBy(xpath = "//div/a[@class='mr-3 text-black tw-text-sm' and contains(text(),'Login')]")
+    @FindBy(xpath = "//div[@data-target='csrf-meta.loggedOutNavi']/div/span[@data-target='#signInModal' and contains(text(),'Login')]")
     private WebElement loginBtn;
 
-    @FindBy(xpath = "//div/a[@class='text-black mr-1 tw-text-sm' and contains(text(),'Sign Up')]")
+    @FindBy(xpath = "//div[@data-target='csrf-meta.loggedOutNavi']/div/button[@data-target='#signUpModal' and contains(text(),'Sign Up')]")
     private WebElement signUpBtn;
 
     @FindBy(id = "signInEmail")
@@ -50,13 +50,13 @@ public class HomePage extends WebApiUtils {
     @FindBy(xpath = "//div[@class= 'unobtrusive-flash-message']")
     private WebElement signedInSignedOutMessage;
 
-    @FindBy(css = " a.text-black > i.fas.fa-user")
+    @FindBy(css = "span.text-black.tw-cursor-pointer > i.fas.fa-user")
     private WebElement humanIcon;
 
-    @FindBy(xpath = " //div/a[@href='/account/sign_out?locale=en' and @class='dropdown-item py-2 tw-text-sm']")
+    @FindBy(xpath = "//div/span[@data-url='/account/sign_out?locale=en' and contains(text(), 'Sign Out')]")
     private WebElement signOutBtn;
 
-    @FindBy(xpath = "//div[@data-action='click->desktop-search-popup#showSearchPopup']")
+    @FindBy(xpath = "//div[@id='search-bar']/div[contains(text(),'Search')]")
     private WebElement searchBox;
 
     @FindBy(xpath = "//input[@placeholder='Search token name or exchange']")
@@ -71,11 +71,14 @@ public class HomePage extends WebApiUtils {
     @FindBy(xpath = "//div[contains(text(),'NFT')]")
     private WebElement nftText;
 
-    @FindBy(xpath = "//ul[@class='list-reset relevant-results']/li")
+    @FindBy(xpath = "//li/a[contains(@href,'type=coin')]")
     private List<WebElement> listOfTrendingCoins;
 
     @FindBy(xpath = "//ul[@class='list-reset relevant-results']/li")
     private List<WebElement> searchedCoins;
+
+    @FindBy(xpath = "//*[@id='challenge-stage']//input[@type='checkbox']")
+    private WebElement verifyCheckBox;
 
 
     // ACTIONS IN HOMEPAGE
@@ -150,6 +153,10 @@ public class HomePage extends WebApiUtils {
 
         driver.navigate().refresh();
         return this;
+    }
+
+    public void verifyHumanCheck() throws Exception {
+        Thread.sleep(130000);
     }
 
 
