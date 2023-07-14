@@ -17,7 +17,7 @@ public class BaseTest {
     private WebDriver driver;
     protected HomePage homePage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     @Parameters({"URL", "browser"})
     public void setUp(@Optional("https://www.coingecko.com/") String URL, @Optional("Chrome") String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
@@ -36,7 +36,7 @@ public class BaseTest {
         driver.get(URL);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         driver.quit();
     }
