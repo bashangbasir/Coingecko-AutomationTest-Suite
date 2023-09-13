@@ -7,16 +7,21 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
-        
       - name: Install Java and Maven
         uses: actions/setup-java@v3
         with:
           java-version: '8'
           distribution: 'adopt'
-          cache: maven
-          
+          cache: maven     
       - name: Run API Test
         run: mvn test -f coingecko-api
+      - name: Install Java and Maven
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: api-report
+          path: coingecko-api/target/surefire-reports
+          retention-days: 30
           
           
         
