@@ -15,7 +15,7 @@ jobs:
           cache: maven     
       - name: Run API Test
         run: mvn test -f coingecko-api
-      - name: Install Java and Maven
+      - name: Upload API Report
         uses: actions/upload-artifact@v3
         if: always()
         with:
