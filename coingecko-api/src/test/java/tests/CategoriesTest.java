@@ -65,7 +65,7 @@ public class CategoriesTest extends BaseTest {
                 marketCapValues.add(response.jsonPath().get("[" + i + "].market_cap"));
             }
         }
-        Assert.assertTrue((marketCapValues.get(0) <= marketCapValues.get(1)) && (marketCapValues.get(1) <= marketCapValues.get(2)));
+        Assert.assertTrue((marketCapValues.get(0) <= marketCapValues.get(1)) && (marketCapValues.get(1) <= marketCapValues.get(2)) , String.format("The order is not ascending | {%f} >= {%f} >= {%f}", marketCapValues.get(0), marketCapValues.get(1), marketCapValues.get(2)));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class CategoriesTest extends BaseTest {
         float firstCategoryMarketCap = response.jsonPath().get("[0].market_cap");
         float secondCategoryMarketCap = response.jsonPath().get("[1].market_cap");
         float thirdCategoryMarketCap = response.jsonPath().get("[2].market_cap");
-        Assert.assertTrue((firstCategoryMarketCap >= secondCategoryMarketCap) && (secondCategoryMarketCap >= thirdCategoryMarketCap));
+        Assert.assertTrue((firstCategoryMarketCap >= secondCategoryMarketCap) && (secondCategoryMarketCap >= thirdCategoryMarketCap), String.format("The order is not descending | {%f} >= {%f} >= {%f}", firstCategoryMarketCap, secondCategoryMarketCap, thirdCategoryMarketCap));
     }
 
     // name_desc,
@@ -100,7 +100,7 @@ public class CategoriesTest extends BaseTest {
         String secondName = response.jsonPath().get("[1].name");
         String thirdName = response.jsonPath().get("[2].name");
         // .compareToIgnoreCase() method will return negative value  if string1 comes before string2
-        Assert.assertTrue((firstName.compareToIgnoreCase(secondName) < 0) && (secondName.compareToIgnoreCase(thirdName) < 0));
+        Assert.assertTrue((firstName.compareToIgnoreCase(secondName) < 0) && (secondName.compareToIgnoreCase(thirdName) < 0), String.format("The order is not ascending | {%s} >= {%s} >= {%s}", firstName, secondName, thirdName));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class CategoriesTest extends BaseTest {
         String secondName = response.jsonPath().get("[1].name");
         String thirdName = response.jsonPath().get("[2].name");
         // .compareToIgnoreCase() method will return positive value  if string1 comes before string2
-        Assert.assertTrue((firstName.compareToIgnoreCase(secondName) > 0) && (secondName.compareToIgnoreCase(thirdName) > 0));
+        Assert.assertTrue((firstName.compareToIgnoreCase(secondName) > 0) && (secondName.compareToIgnoreCase(thirdName) > 0), String.format("The order is not descending | {%s} >= {%s} >= {%s}", firstName, secondName, thirdName));
     }
 
     @Test
@@ -133,7 +133,7 @@ public class CategoriesTest extends BaseTest {
         float firstCategoryMarketCapChange24h = response.jsonPath().get("[0].market_cap_change_24h");
         float secondCategoryMarketCapChange24h = response.jsonPath().get("[1].market_cap_change_24h");
         float thirdCategoryMarketCapChange24h = response.jsonPath().get("[2].market_cap_change_24h");
-        Assert.assertTrue((firstCategoryMarketCapChange24h <= secondCategoryMarketCapChange24h) && (secondCategoryMarketCapChange24h <= thirdCategoryMarketCapChange24h));
+        Assert.assertTrue((firstCategoryMarketCapChange24h <= secondCategoryMarketCapChange24h) && (secondCategoryMarketCapChange24h <= thirdCategoryMarketCapChange24h), String.format("The order is not ascending | {%f} >= {%f} >= {%f}", firstCategoryMarketCapChange24h, secondCategoryMarketCapChange24h, thirdCategoryMarketCapChange24h));
     }
 
     @Test
@@ -147,10 +147,16 @@ public class CategoriesTest extends BaseTest {
                 .spec(statusCode200responseSpec)
                 .extract().response();
 
-        float firstCategoryMarketCapChange24h = response.jsonPath().get("[0].market_cap_change_24h");
-        float secondCategoryMarketCapChange24h = response.jsonPath().get("[1].market_cap_change_24h");
-        float thirdCategoryMarketCapChange24h = response.jsonPath().get("[2].market_cap_change_24h");
-        Assert.assertTrue((firstCategoryMarketCapChange24h >= secondCategoryMarketCapChange24h) && (secondCategoryMarketCapChange24h >= thirdCategoryMarketCapChange24h));
+        ArrayList<Float> marketCapValues = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            if (response.jsonPath().get("[" + i + "].market_cap_change_24h") == null) {
+                marketCapValues.add(0.0F);
+            } else {
+                marketCapValues.add(response.jsonPath().get("[" + i + "].market_cap_change_24h"));
+            }
+        }
+
+        Assert.assertTrue((marketCapValues.get(0) >= marketCapValues.get(1)) && (marketCapValues.get(1) >= marketCapValues.get(2)), String.format("The order is not descending | {%f} >= {%f} >= {%f}", marketCapValues.get(0), marketCapValues.get(1), marketCapValues.get(2)));
     }
 
     @Test
@@ -161,7 +167,7 @@ public class CategoriesTest extends BaseTest {
         sendGet(CATEGORIES_URI, queryParams)
                 .then()
                 .spec(statusCode400responseSpec)
-                .assertThat().body("'error'", equalTo(CATEGORIES_INVALID_PARAM));
+                .assertThat().body("error", equalTo(CATEGORIES_INVALID_PARAM));
 
     }
     @Test
@@ -175,7 +181,6 @@ public class CategoriesTest extends BaseTest {
                 .response();
 
         CategoriesResponseModel[] data =  CommonUtils.getJsonAsObject(res, CategoriesResponseModel[].class);
-        System.out.println(data[0]);
 
         Assert.assertNotNull(data[0].getId(), "Id should not null");
         Assert.assertNotNull(data[0].getName(), "name should not null");
