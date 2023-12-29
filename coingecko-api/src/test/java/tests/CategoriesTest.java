@@ -1,7 +1,9 @@
 package tests;
 
 import base.BaseTest;
+
 import io.restassured.response.Response;
+import models.CategoriesResponseModel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.CommonUtils;
@@ -10,10 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static constants.MessagesConstant.CATEGORIES_INVALID_PARAM;
 import static constants.URIConstant.CATEGORIES_URI;
 import static constants.URIConstant.LIST_CATEGORIES_URI;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.*;
 
 
 public class CategoriesTest extends BaseTest {
@@ -25,7 +27,9 @@ public class CategoriesTest extends BaseTest {
                 .spec(statusCode200responseSpec)
                 //Verify body has name and category_id field.
                 .assertThat().body("[0]", hasKey("name"))
-                .assertThat().body("[0]", hasKey("category_id"));
+                .assertThat().body("[0]", hasKey("category_id"))
+                .assertThat().body("[0].name", notNullValue())
+                .assertThat().body("[0].category_id", notNullValue());
     }
 
     @Test
@@ -39,7 +43,7 @@ public class CategoriesTest extends BaseTest {
         float firstCategoryMarketCap = response.jsonPath().get("[0].market_cap");
         float secondCategoryMarketCap = response.jsonPath().get("[1].market_cap");
         float thirdCategoryMarketCap = response.jsonPath().get("[2].market_cap");
-        Assert.assertTrue((firstCategoryMarketCap >= secondCategoryMarketCap) && (secondCategoryMarketCap >= thirdCategoryMarketCap));
+        Assert.assertTrue((firstCategoryMarketCap >= secondCategoryMarketCap) && (secondCategoryMarketCap >= thirdCategoryMarketCap), String.format("The order is not descending | {%f} >= {%f} >= {%f}", firstCategoryMarketCap, secondCategoryMarketCap, thirdCategoryMarketCap));
     }
 
     @Test
@@ -157,9 +161,33 @@ public class CategoriesTest extends BaseTest {
         sendGet(CATEGORIES_URI, queryParams)
                 .then()
                 .spec(statusCode400responseSpec)
-                .assertThat().body("'error'", equalTo("invalid parameter"));
+                .assertThat().body("'error'", equalTo(CATEGORIES_INVALID_PARAM));
 
     }
+    @Test
+    public void CATEGORIES_getListAllCategoriesValidateDataProperties() {
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("order", "market_cap_change_24h_desc");
+
+        Response res = sendGet(CATEGORIES_URI, queryParams)
+                .then().spec(statusCode200responseSpec)
+                .extract()
+                .response();
+
+        CategoriesResponseModel[] data =  CommonUtils.getJsonAsObject(res, CategoriesResponseModel[].class);
+        System.out.println(data[0]);
+
+        Assert.assertNotNull(data[0].getId(), "Id should not null");
+        Assert.assertNotNull(data[0].getName(), "name should not null");
+        Assert.assertNotNull(data[0].getMarket_cap(), "market_cap should not null");
+        Assert.assertNotNull(data[0].getMarket_cap_change_24h(), "market_cap_change_24h should not null");
+        Assert.assertNotNull(data[0].getContent(), "contents should not null");
+        Assert.assertEquals(data[0].getTop_3_coins().size(), 3);
+        Assert.assertNotNull(data[0].getVolume_24h(), "volume_24h should not null");
+        Assert.assertNotNull(data[0].getUpdated_at(), "update_at should not null");
+
+    }
+
 
 
 }
