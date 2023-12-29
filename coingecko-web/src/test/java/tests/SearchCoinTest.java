@@ -38,7 +38,8 @@ public class SearchCoinTest extends BaseTest {
                 .verifyTrendingCoinsExist()
                 .userSearch(coins);
 
-        Thread.sleep(1000); // need to improve this code. Use wait maybe instead of sleep.
+        //FIXME: need to improve this code. Use wait maybe instead of sleep.
+        Thread.sleep(1000);
 
         homePage.selectFirstSearchResult()
                 .verifyCoinNameInBreadcrumb(coins);

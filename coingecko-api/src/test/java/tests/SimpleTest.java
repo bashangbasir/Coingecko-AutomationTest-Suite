@@ -71,7 +71,7 @@ public class SimpleTest extends BaseTest {
                 .assertThat().body(coinId, hasKey((String) currencies.get(0)))
                 .assertThat().body(coinId, hasKey((String) currencies.get(1)))
                 .assertThat().body(coinId, hasKey((String) currencies.get(2)));
-                //Verify body contains ids field
+        //Verify body contains ids field
     }
 
     @Test(dataProvider = "dataMultipleCoinVsSingleCurrencies", dataProviderClass = Data.class)

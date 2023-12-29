@@ -44,7 +44,7 @@ public class HomePage extends WebApiUtils {
     @FindBy(id = "signInPassword")
     private WebElement passwordTextBox;
 
-    @FindBy(id ="sign-in-button")
+    @FindBy(id = "sign-in-button")
     private WebElement signInBtn;
 
     @FindBy(xpath = "//div[@class= 'unobtrusive-flash-message']")
@@ -95,7 +95,7 @@ public class HomePage extends WebApiUtils {
         return this;
     }
 
-    public HomePage userLoginWithValidData(String email,String password){
+    public HomePage userLoginWithValidData(String email, String password) {
         loginBtn.click();
         emailTextBox.sendKeys(email);
         passwordTextBox.sendKeys(password);
@@ -111,45 +111,45 @@ public class HomePage extends WebApiUtils {
         return new SignInPage(driver);
     }
 
-    public HomePage verifySignedInMessageSuccess(){
-        Assert.assertEquals(signedInSignedOutMessage.getText(),SIGNED_IN_SUCCESS_TEXT);
+    public HomePage verifySignedInMessageSuccess() {
+        Assert.assertEquals(signedInSignedOutMessage.getText(), SIGNED_IN_SUCCESS_TEXT);
         return this;
     }
 
-    public HomePage verifySignedOutMessageSuccess(){
-        Assert.assertEquals(signedInSignedOutMessage.getText(),SIGNED_OUT_SUCCESS_TEXT);
+    public HomePage verifySignedOutMessageSuccess() {
+        Assert.assertEquals(signedInSignedOutMessage.getText(), SIGNED_OUT_SUCCESS_TEXT);
         return this;
     }
 
-    public HomePage userSignOut(){
+    public HomePage userSignOut() {
         humanIcon.click();
         signOutBtn.click();
         return this;
     }
 
-    public HomePage clickSearchTextBox(){
+    public HomePage clickSearchTextBox() {
         searchBox.click();
         return this;
     }
 
-    public HomePage verifyTrendingCoinsExist(){
+    public HomePage verifyTrendingCoinsExist() {
         Assert.assertTrue(trendingText.isDisplayed());
         int trendingCoinSize = listOfTrendingCoins.size();
-        Assert.assertEquals(trendingCoinSize,7, "Trending coins actual " + trendingCoinSize + " but expected 7");
+        Assert.assertEquals(trendingCoinSize, 7, "Trending coins actual " + trendingCoinSize + " but expected 7");
         return this;
     }
 
-    public HomePage userSearch(String searchedString){
+    public HomePage userSearch(String searchedString) {
         searchInput.sendKeys(searchedString);
         return this;
     }
 
-    public CoinPage selectFirstSearchResult(){
+    public CoinPage selectFirstSearchResult() {
         searchedCoins.get(0).click();
         return new CoinPage(driver);
     }
 
-    public HomePage refreshPage(){
+    public HomePage refreshPage() {
 
         driver.navigate().refresh();
         return this;
@@ -158,7 +158,6 @@ public class HomePage extends WebApiUtils {
     public void verifyHumanCheck() throws Exception {
         Thread.sleep(130000);
     }
-
 
 
 }

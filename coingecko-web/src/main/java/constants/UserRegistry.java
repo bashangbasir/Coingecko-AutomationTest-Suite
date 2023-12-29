@@ -14,15 +14,16 @@ public class UserRegistry {
 
     public UserRegistry() {
         Gson gson = new GsonBuilder().create();
-        try{
+        try {
             FileReader fileReader = new FileReader("src/main/resources/users.json");
-            this.resultMap = gson.fromJson(fileReader, new TypeToken<Map<String, User>>() {}.getType());
-        }catch (Exception e){
+            this.resultMap = gson.fromJson(fileReader, new TypeToken<Map<String, User>>() {
+            }.getType());
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public User getUser(String key){
+    public User getUser(String key) {
         return this.resultMap.get(key);
     }
 }

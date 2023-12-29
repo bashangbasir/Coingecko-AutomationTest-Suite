@@ -19,34 +19,38 @@ public class WebApiUtils {
     public String getCurrentPageUrl(WebDriver driver) {
         return driver.getCurrentUrl();
     }
+
     public void refreshCurrentPage(WebDriver driver) {
         driver.navigate().refresh();
     }
+
     public void forwardToNextPage(WebDriver driver) {
         driver.navigate().forward();
     }
+
     public void backToPreviousPage(WebDriver driver) {
         driver.navigate().back();
     }
+
     public void backToTopWindow(WebDriver driver) {
         driver.switchTo().defaultContent();
     }
 
     public void scrollToBottomPage(WebDriver driver) {
-        this.javascriptExecutor = (JavascriptExecutor)driver;
+        this.javascriptExecutor = (JavascriptExecutor) driver;
         this.javascriptExecutor.executeScript("window.scrollBy(0,document.body.scrollHeight)", new Object[0]);
     }
 
-    public WebElement waitForElementClickable(WebDriver driver,WebElement element) {
+    public WebElement waitForElementClickable(WebDriver driver, WebElement element) {
         this.waitExplicit = new WebDriverWait(driver, 30);
-        return (WebElement)this.waitExplicit.until(ExpectedConditions.elementToBeClickable(element));
+        return (WebElement) this.waitExplicit.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public WebElement waitForElementVisible(WebDriver driver,WebElement element) {
+    public WebElement waitForElementVisible(WebDriver driver, WebElement element) {
         this.waitExplicit = new WebDriverWait(driver, 30);
 
         try {
-            element = (WebElement)this.waitExplicit.until(ExpectedConditions.visibilityOf(element));
+            element = (WebElement) this.waitExplicit.until(ExpectedConditions.visibilityOf(element));
         } catch (Exception exception) {
 
         }

@@ -54,11 +54,10 @@ public class CategoriesTest extends BaseTest {
 
         //market_cap can be null, added condition if null then set 0
         ArrayList<Float> marketCapValues = new ArrayList<>();
-        for(int i=0; i<3;i++){
-            if(response.jsonPath().get("[" + i + "].market_cap")==null){
+        for (int i = 0; i < 3; i++) {
+            if (response.jsonPath().get("[" + i + "].market_cap") == null) {
                 marketCapValues.add(0.0F);
-            }
-            else{
+            } else {
                 marketCapValues.add(response.jsonPath().get("[" + i + "].market_cap"));
             }
         }

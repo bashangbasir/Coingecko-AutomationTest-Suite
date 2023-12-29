@@ -24,17 +24,17 @@ public class SignInPage {
 
     // ACTION IN SIGN IN PAGE
 
-    public SignInPage verifySignInErrorMessage(){
+    public SignInPage verifySignInErrorMessage() {
         Assert.assertEquals(unsuccessfulSignInMessage.getText(), SIGN_IN_INVALID_EMAIL_PASSWORD_TEXT);
         return this;
     }
 
-    public SignInPage verifyUnconfirmedEmailMessage(){
+    public SignInPage verifyUnconfirmedEmailMessage() {
         Assert.assertEquals(unsuccessfulSignInMessage.getText(), SIGN_IN_UNCONFIRM_EMAIL_TEXT);
         return this;
     }
 
-    public SignInPage verifySignInPageTittle(){
+    public SignInPage verifySignInPageTittle() {
         Assert.assertEquals(driver.getTitle(), SIGN_IN_TABTITTLE_TEXT);
         return this;
     }

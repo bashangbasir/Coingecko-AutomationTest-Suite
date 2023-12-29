@@ -1,6 +1,6 @@
 name: API test
 run-name: API testing
-on: 
+on:
   push:
     branches: [ main, master ]
   pull_request:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 jobs:
   run-test:
-    runs-on:  ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-          cache: maven     
+          cache: maven
       - name: Run API Test
         run: mvn test -f coingecko-api
       - name: Upload API Report

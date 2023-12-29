@@ -59,10 +59,10 @@ public class BaseTest {
     public Response sendPost(String url, Map<String, Object> body) {
         return given()
                 .when().spec(getRequestSpec().build())
-                .post(url,body);
+                .post(url, body);
     }
 
-    public static RequestSpecBuilder getRequestSpec(){
+    public static RequestSpecBuilder getRequestSpec() {
         return new RequestSpecBuilder();
     }
 }

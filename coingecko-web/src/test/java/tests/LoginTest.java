@@ -23,7 +23,7 @@ public class LoginTest extends BaseTest {
                 .verifySignedOutMessageSuccess();
     }
 
-    @Test(dataProvider = "invalidUser",  dataProviderClass = Data.class)
+    @Test(dataProvider = "invalidUser", dataProviderClass = Data.class)
     public void LOGIN_userLoginWithInvalidDetails(String email, String password) {
         homePage.clearCookiesModal()
                 .verifyHomePageTittle()

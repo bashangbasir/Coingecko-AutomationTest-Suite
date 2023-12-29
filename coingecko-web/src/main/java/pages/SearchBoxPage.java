@@ -34,14 +34,11 @@ public class SearchBoxPage {
 
     // ACTION IN SearchBox SCREEN
 
-    public void verifyTrendingCoinsExist(){
+    public void verifyTrendingCoinsExist() {
         Assert.assertTrue(trendingText.isDisplayed());
         int trendingCoinSize = listOfTrendingCoins.size();
-        Assert.assertEquals(trendingCoinSize,7, "Trending coins actual " + trendingCoinSize + " but expected 7");
+        Assert.assertEquals(trendingCoinSize, 7, "Trending coins actual " + trendingCoinSize + " but expected 7");
     }
-
-
-
 
 
 }

@@ -19,11 +19,10 @@ public class CoinPage {
     private WebElement coinNameBreadcrumb;
 
 
-    public CoinPage verifyCoinNameInBreadcrumb(String searchedString){
-        Assert.assertTrue(coinNameBreadcrumb.getText().equalsIgnoreCase(searchedString + " price"),"Actual : " + coinNameBreadcrumb.getText() + " - Expected : " + searchedString + " price" );
+    public CoinPage verifyCoinNameInBreadcrumb(String searchedString) {
+        Assert.assertTrue(coinNameBreadcrumb.getText().equalsIgnoreCase(searchedString + " price"), "Actual : " + coinNameBreadcrumb.getText() + " - Expected : " + searchedString + " price");
         return this;
     }
-
 
 
 }

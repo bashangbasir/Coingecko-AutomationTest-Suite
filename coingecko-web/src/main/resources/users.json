@@ -1,16 +1,13 @@
 {
-  "invalid-user":
-  {
+  "invalid-user": {
     "email": "random.user.email@gmail.com",
     "password": "<password>"
   },
-  "valid-user":
-  {
+  "valid-user": {
     "email": "confirmemailtester@gmail.com",
     "password": "TestPassword@123"
   },
-  "unverified-user":
-  {
+  "unverified-user": {
     "email": "valid@email.com",
     "password": "Valid@123"
   }
