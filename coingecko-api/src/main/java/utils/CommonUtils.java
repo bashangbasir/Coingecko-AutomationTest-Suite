@@ -2,6 +2,7 @@ package utils;
 
 import java.util.List;
 import java.util.Random;
+import io.restassured.response.Response;
 
 public class CommonUtils {
 
@@ -29,5 +30,8 @@ public class CommonUtils {
         return rndString.toString();
     }
 
+    public static <T> T getJsonAsObject(Response res, Class<T> cls) {
+        return res.body().as(cls);
+    }
 
 }
