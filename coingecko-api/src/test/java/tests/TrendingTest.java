@@ -14,7 +14,9 @@ public class TrendingTest extends BaseTest {
                 .then()
                 .spec(statusCode200responseSpec)
                 //Verify the body got 7 array of coins
-                .assertThat().body("coins", hasSize(7));
+                .assertThat().body("coins", hasSize(15))
+                .assertThat().body("nfts", hasSize(7))
+                .assertThat().body("categories", hasSize(6));
     }
 
 
