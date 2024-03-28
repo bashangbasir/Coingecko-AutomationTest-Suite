@@ -5,9 +5,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.ResponseSpecification;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.util.Map;
 
@@ -32,11 +30,10 @@ public class BaseTest {
                 expectContentType(ContentType.JSON).
                 build();
     }
-
-    @BeforeClass
-    public void pauseForMinute() throws Exception {
+    @BeforeMethod(alwaysRun = true)
+    public void pauseForFewSeconds() throws Exception {
         //since the api is public and got rate limit. Hack for 10-30 request/min
-        Thread.sleep(60000);
+        Thread.sleep(15000);
     }
 
     @AfterSuite
