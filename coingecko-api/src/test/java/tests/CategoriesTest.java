@@ -168,8 +168,8 @@ public class CategoriesTest extends BaseTest {
                 .then()
                 .spec(statusCode400responseSpec)
                 .assertThat().body("error", equalTo(CATEGORIES_INVALID_PARAM));
-
     }
+
     @Test
     public void CATEGORIES_getListAllCategoriesValidateDataProperties() {
         Map<String, Object> queryParams = new HashMap<>();
@@ -190,9 +190,5 @@ public class CategoriesTest extends BaseTest {
         Assert.assertEquals(data[0].getTop_3_coins().size(), 3);
         Assert.assertNotNull(data[0].getVolume_24h(), "volume_24h should not null");
         Assert.assertNotNull(data[0].getUpdated_at(), "update_at should not null");
-
     }
-
-
-
 }
