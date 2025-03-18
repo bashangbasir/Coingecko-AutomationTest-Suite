@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
       - name: Install Java and Maven
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4.7.0
         with:
           java-version: '8'
           distribution: 'adopt'
@@ -21,7 +21,7 @@ jobs:
       - name: Run API Test
         run: mvn test -f coingecko-api
       - name: Upload API Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.1
         if: always()
         with:
           name: api-report
